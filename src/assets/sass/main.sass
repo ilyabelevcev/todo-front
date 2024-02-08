@@ -1,0 +1,51 @@
+@import "variables"
+@import "fonts"
+
+*
+  box-sizing: border-box
+  -webkit-appearance: none
+  -webkit-tap-highlight-color: transparent
+  -webkit-text-size-adjust: 100%
+
+p,ol,ul
+  margin: 0
+  padding: 0
+  border: 0
+*::not('.pi'),*::before,*::after
+  font-family: $fontFamily
+.p-invalid
+  .p-editor-toolbar, .p-editor-content
+    border-color: $errorColor !important
+  .p-datepicker
+    border-color: $errorColor !important
+
+.p-datepicker, .p-link, .ql-container 
+  font-family: $fontFamily !important
+.p-editor-container .p-editor-content .ql-editor,
+.ql-container
+  font-size: 1rem !important
+  height: 200px
+.p-accordion
+  height: 100%
+// .p-accordion .p-accordion-content,
+.p-accordion .p-accordion-header .p-accordion-header-link
+  background: none
+.p-accordion-tab-active .p-accordion-header
+  border-bottom-left-radius: 0 !important
+  border-bottom-right-radius: 0 !important
+*::placeholder, .p-placeholder, .ql-editor.ql-blank::before
+  font-family: $fontFamily !important
+  font-size: 1rem !important
+  font-style: normal !important
+  color: var(--gray-400) !important
+
+::-webkit-scrollbar 
+  width: 5px
+::-webkit-scrollbar-track 
+  background: transparent
+::-webkit-scrollbar-thumb 
+  background-color: var(--primary-color)
+  border-radius: 20px
+
+.app-input
+  margin-bottom: 20px
