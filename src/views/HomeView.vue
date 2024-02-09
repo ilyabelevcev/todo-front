@@ -1,11 +1,19 @@
 <template>
-	<div class="container__home">
+	<div
+		:style="{ overflow: bodyHidden ? 'hidden' : 'visible' }"
+		class="container__home"
+	>
 		<Toast />
 		<div class="home__section">
 			<form @submit.prevent="addTask" class="form">
 				<AppModal
 					v-show="showModal"
-					@close="() => (showModal = false)"
+					@close="
+						() => {
+							bodyHidden = false;
+							showModal = false;
+						}
+					"
 					:title="'Новая задача'"
 				>
 					<div class="modal-body-wrapper">
@@ -75,7 +83,7 @@
 
 				<Calendar
 					v-model="eventCalendar"
-          breakpoint="991px"
+					breakpoint="991px"
 					:class="{ 'p-invalid': v$.eventCalendar.$dirty && !eventCalendar }"
 					@date-select="selectDate(eventCalendar)"
 					showTime
@@ -90,6 +98,7 @@
 				@removeTask="() => this.showToast('success', 'Задача успешно удалена')"
 				@openModal="
 					() => {
+						bodyHidden = true;
 						showModal = true;
 					}
 				"
@@ -135,7 +144,8 @@ export default {
 			color: '',
 			task: {},
 			disBtnAddTask: false,
-			showModal: false
+			showModal: false,
+			bodyHidden: false
 		};
 	},
 	validations: {
@@ -277,6 +287,7 @@ export default {
 			this.subtitle = '';
 			this.color = '';
 
+      this.bodyHidden = false;
 			this.showModal = false;
 			this.v$.$reset();
 		}
@@ -309,7 +320,12 @@ export default {
 
 <style lang="sass">
 @import "@/assets/sass/variables"
-
+.p-toast
+  @media (max-width: 530px)
+    width: 90%
+    left: 50% !important
+    right: 0 !important
+    transform: translateX(-50%)
 .container__home
   max-width: 1200px
   margin: 0 auto
@@ -318,8 +334,8 @@ export default {
     justify-content: space-between
     margin-bottom: 30px
     max-height: 515px
-    @media (max-width: 991px) 
-      max-height: none
+    @media (max-width: 991px)
+      max-height: 413px
       flex-direction: column
   .form
     @media (max-width: 991px)
@@ -331,9 +347,9 @@ export default {
   .p-calendar
     height: 515px
     width: auto
-    @media (max-width: 991px) 
+    @media (max-width: 991px)
       width: 100%
-      height: auto
+      height: 413px
   .p-dropdown
     width: 100%
     .p-dropdown-label

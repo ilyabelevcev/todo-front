@@ -56,6 +56,10 @@ export default {
   display: flex
   justify-content: center
   align-items: center
+  @media (max-width: 530px)
+    padding: 3% 0 0 0
+    overflow: overlay
+    align-items: flex-start
 
 
 .modal
@@ -67,9 +71,13 @@ export default {
   background-color: #fff
   box-shadow: 0px 0px 35px 3px rgba(5, 35, 6, 0.5)
   border-radius: 20px
-  width: 600px
+  width: 100%
+  max-width: 530px
   padding: 10px 40px
   transition: 0.3s
+  @media (max-width: 530px)
+    padding: 10px 20px
+    max-width: 90%
   .modal-content
     width: 100%
   .modal-header
